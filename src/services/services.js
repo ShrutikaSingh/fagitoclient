@@ -1,7 +1,7 @@
 import axios from 'axios'
-const server = 'http://localhost:8080';
-class Services {
+const server = 'https://fagito-api.herokuapp.com';
 
+class Services {
   CreateInstance = (authToken) => {
     let headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' };
     if (authToken) {
@@ -9,7 +9,7 @@ class Services {
     }
     const instance = axios.create({
       baseURL: server,
-      timeout: 1000,
+      timeout: 2000,
       headers
     });
 
@@ -25,7 +25,6 @@ class Services {
       response.status = result.status;
     } catch (err) {
       if (err.response) {
-        console.log(err.response);
         response.error = err.response.data;
         response.status = err.response.status;
       } else {
@@ -33,7 +32,6 @@ class Services {
         response.status = null;
       }
     }
-    console.log({ POST: response });
     return response;
   }
 
@@ -53,7 +51,6 @@ class Services {
         response.status = null;
       }
     }
-    console.log({ GET: response });
     return response;
   }
 
